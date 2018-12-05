@@ -7,7 +7,8 @@ namespace AppCMOV2.Models
     public enum MenuItemType
     {
         Browse,
-        About
+        About,
+        Stocks
     }
     public class HomeMenuItem
     {

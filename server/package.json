@@ -14,7 +14,8 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "morgan": "^1.9.1",
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.18.4",
+    "request": "^2.88.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"

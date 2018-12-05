@@ -32,6 +32,9 @@ namespace AppCMOV2.Views
                     case (int)MenuItemType.About:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));
                         break;
+                    case (int)MenuItemType.Stocks:
+                        MenuPages.Add(id, new NavigationPage(new Stocks()));
+                        break;
                 }
             }
 
