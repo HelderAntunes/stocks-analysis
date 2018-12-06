@@ -4,6 +4,8 @@ using System.Net.Http;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using AppCMOV2.Models;
+using Newtonsoft.Json;
 
 namespace AppCMOV2.Views
 {
@@ -21,15 +23,22 @@ namespace AppCMOV2.Views
             using (HttpClient client = new HttpClient())
                 try
                 {
-                    // HttpResponseMessage message = await client.GetAsync(string.Format("http://data.fixer.io/api/latest?access_key=30d32b83f4fe085e9d7d25174db2e2bb&symbols={0}", "EUR"));
-                    HttpResponseMessage message = await client.GetAsync("http://localhost:3000/api/stocks?company=INTC&type=monthly&startDate=20180701");
+                    HttpResponseMessage message = await client.GetAsync(App.base_url);
                     lbResult.Text = message.StatusCode.ToString();
                     if (message.StatusCode == HttpStatusCode.OK)
-                        lbResult.Text = await message.Content.ReadAsStringAsync();
+                    {
+                        StockList r = JsonConvert.DeserializeObject<StockList>(await message.Content.ReadAsStringAsync());
+                        string jsonParsed = r.results[0].symbol + " - " + r.results.Count + "\n";
+                        foreach (var stock in r.results)
+                        {
+                            jsonParsed += stock.tradingDay + " - " + stock.close + "\n";
+                        }
+                        lbResult.Text = jsonParsed;
+                    }
                 }
                 catch (Exception ex)
                 {
-                    lbResult.Text = ex.Message;
+                    lbResult.Text = ex.ToString();
                 }
         }
     }
