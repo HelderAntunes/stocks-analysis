@@ -8,6 +8,7 @@ namespace AppCMOV2
 {
     public partial class App : Application
     {
+        public static string base_url = "http://localhost:3000/api/stocks?company=INTC&type=monthly&startDate=20180701";
 
         public App()
         {
