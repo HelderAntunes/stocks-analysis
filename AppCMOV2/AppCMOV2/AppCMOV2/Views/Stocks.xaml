@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              x:Class="AppCMOV2.Views.Stocks"
              xmlns:vm="clr-namespace:AppCMOV2.ViewModels"
              Title="{Binding Title}">
@@ -11,9 +12,15 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
+            <Label Text="Stocks" 
                 HorizontalOptions="CenterAndExpand" />
+
+            <skia:SKCanvasView x:Name="chartCanvasView"
+                               PaintSurface="OnCanvasViewPaintSurface" 
+                               VerticalOptions="FillAndExpand">
+            </skia:SKCanvasView>
+   
+            
             <Label x:Name="lbResult"
              Text="" />
             <Button x:Name="btCall"
