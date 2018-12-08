@@ -104,6 +104,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="google_logo.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
@@ -159,6 +160,36 @@
       <Project>{3BCD40AB-4B8D-4DB0-BB1D-B1B25B6B8C55}</Project>
       <Name>AppCMOV2</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\OpenSans-Light.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\OpenSans-LightItalic.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\OpenSans-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\OpenSans-SemiBold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\OpenSans-SemiBoldItalic.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\OpenSans-Bold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\OpenSans-BoldItalic.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\OpenSans-ExtraBold.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\OpenSans-ExtraBoldItalic.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\OpenSans-Italic.ttf" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

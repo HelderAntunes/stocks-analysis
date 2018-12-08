@@ -6,98 +6,87 @@ module.exports = {
     const params = req.query
     const type = params.type
     const startDate = params.startDate
-    const company = params.company
+    const company1 = params.company1
+    const company2 = params.company2
+
+    if (company1 === 'none' && company2 === 'none') {
+      res.status(400).send({
+        "status": {
+          "code": 400,
+          "message": "Some company must be selected."
+        },
+      })
+      return;
+    }
+
+    if (company1 === 'none') {
+      company1 = company2
+      company2 = 'none';
+    }
+
+    let nameToTick = {};
+    nameToTick['Apple'] = 'AAPL';
+    nameToTick['IBM'] = 'IBM';
+    nameToTick['Hewlett Packard'] = 'HPE';
+    nameToTick['Microsoft'] = 'MSFT';
+    nameToTick['Oracle'] = 'ORCL';
+    nameToTick['Google'] = 'GOOGL';
+    nameToTick['Facebook'] = 'FB';
+    nameToTick['Twitter'] = 'TWTR';
+    nameToTick['Intel'] = 'INTC';
+    nameToTick['AMD'] = 'AMD';
 
     const options = {
       url: 'https://marketdata.websol.barchart.com/getHistory.json?apikey=' + APIKEY +
-        '&symbol=' + company + '&startDate=' + startDate + '&type=' + type,
+        '&symbol=' + nameToTick[company1] + '&startDate=' + startDate + '&type=' + type,
     }
-
-    res.status(200).send({
-      "status": {
-        "code": 200,
-        "message": "Success."
-      },
-      "results": [
-        {
-          "symbol": "INTC",
-          "timestamp": "2018-07-01T00:00:00-04:00",
-          "tradingDay": "2018-07-01",
-          "open": 48.43873,
-          "high": 52.6465,
-          "low": 45.86073,
-          "close": 47.51025,
-          "volume": 23109455,
-          "openInterest": null
-        },
-        {
-          "symbol": "INTC",
-          "timestamp": "2018-08-01T00:00:00-04:00",
-          "tradingDay": "2018-08-01",
-          "open": 47.47075,
-          "high": 50.28355,
-          "low": 45.90113,
-          "close": 48.12712,
-          "volume": 22639343,
-          "openInterest": null
-        },
-        {
-          "symbol": "INTC",
-          "timestamp": "2018-09-01T00:00:00-04:00",
-          "tradingDay": "2018-09-01",
-          "open": 48.07744,
-          "high": 48.12712,
-          "low": 43.78445,
-          "close": 46.99426,
-          "volume": 24509135,
-          "openInterest": null
-        },
-        {
-          "symbol": "INTC",
-          "timestamp": "2018-10-01T00:00:00-04:00",
-          "tradingDay": "2018-10-01",
-          "open": 46.49738,
-          "high": 49.40906,
-          "low": 42.09509,
-          "close": 46.58682,
-          "volume": 34223916,
-          "openInterest": null
-        },
-        {
-          "symbol": "INTC",
-          "timestamp": "2018-11-01T00:00:00-04:00",
-          "tradingDay": "2018-11-01",
-          "open": 46.65638,
-          "high": 49.32,
-          "low": 46.45763,
-          "close": 49.31,
-          "volume": 26347922,
-          "openInterest": null
-        },
-        {
-          "symbol": "INTC",
-          "timestamp": "2018-12-01T00:00:00-05:00",
-          "tradingDay": "2018-12-01",
-          "open": 50,
-          "high": 50.495,
-          "low": 47.675,
-          "close": 47.75,
-          "volume": 33132250,
-          "openInterest": null
-        }
-      ]
-    })
-    /*request(options, (error, response, body) => {
+    console.log(options.url)
+    request(options, (error, response, body) => {
       if (!error && response.statusCode == 200) {
         body = JSON.parse(body)
-        console.log(body.results.length)
-        res.status(200).send(body);
+        const results1 = body.results
+
+        if (company2 === 'none') {
+          let resJSON = {
+            "message": "Success.",
+            "results1": results1,
+            "results2": []
+          }
+
+          res.status(200).send(resJSON);
+          return;
+        } else {
+          const options2 = {
+            url: 'https://marketdata.websol.barchart.com/getHistory.json?apikey=' + APIKEY +
+              '&symbol=' + nameToTick[company2] + '&startDate=' + startDate + '&type=' + type,
+          }
+
+          request(options2, (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+              body = JSON.parse(body)
+              resJSON = {
+                "message": "Success.",
+                "results1": results1,
+                "results2": body.results
+              }
+              console.log(resJSON)
+              res.status(200).send(resJSON)
+            } else {
+              const resJSON = {
+                'message': 'Some error happened.'
+              }
+
+              res.status(400).send(resJSON);
+            }
+          })
+        }
       } else {
         const resJSON = {
           'message': 'Some error happened.'
         }
-        res.status(400).send(response);
+
+        res.status(400).send(resJSON);
       }
-    })*/
+    })
   },
 }
