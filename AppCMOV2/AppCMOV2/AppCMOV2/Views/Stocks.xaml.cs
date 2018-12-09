@@ -18,7 +18,8 @@ namespace AppCMOV2.Views
         List<double> stockPrices1 = new List<double>();
         List<double> stockPrices2 = new List<double>();
         List<string> companiesList = new List<string>();
-        string company1 = "none", company2 = "none";
+        List<string> intervalList = new List<string>();
+        string company1 = "none", company2 = "none", type = "weekly";
 
         public Stocks ()
 		{
@@ -39,6 +40,11 @@ namespace AppCMOV2.Views
             picker1.SelectedIndexChanged += Picker1SelectedIndexChanged;
             picker2.ItemsSource = companiesList;
             picker2.SelectedIndexChanged += Picker2SelectedIndexChanged;
+            intervalList.Add("weekly");
+            intervalList.Add("monthly");
+            pickerInterval.ItemsSource = intervalList;
+            pickerInterval.SelectedIndex = 0;
+            pickerInterval.SelectedIndexChanged += PickerIntervalSelectedIndexChanged;
         }
 
 
@@ -66,6 +72,17 @@ namespace AppCMOV2.Views
             }
         }
 
+        public void PickerIntervalSelectedIndexChanged(object sender, EventArgs e)
+        {
+            Picker picker = (Picker)sender;
+            int selectedIndex = picker.SelectedIndex;
+
+            if (selectedIndex != -1)
+            {
+                type = (string)picker.ItemsSource[selectedIndex];
+            }
+        }
+
         private async void BtCall_Clicked(object sender, EventArgs e)
         {
             stockPrices1.Clear();
@@ -76,7 +93,7 @@ namespace AppCMOV2.Views
                     string url = App.base_url + "stocks?";
                     url += "company1=" + company1;
                     url += "&company2=" + company2;
-                    url += "&type=" + "daily";
+                    url += "&type=" + type;
                     url += "&startDate=" + "20160701";
                     HttpResponseMessage message = await client.GetAsync(url);
                     if (message.StatusCode == HttpStatusCode.OK)
