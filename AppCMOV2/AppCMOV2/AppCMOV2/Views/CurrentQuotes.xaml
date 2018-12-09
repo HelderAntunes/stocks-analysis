@@ -14,6 +14,7 @@
             <Label Text="Current quotes!!!!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="result"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
