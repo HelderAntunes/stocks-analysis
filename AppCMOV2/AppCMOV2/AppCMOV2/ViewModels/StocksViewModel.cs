@@ -4,7 +4,7 @@
     {
         public StocksViewModel()
         {
-            Title = "Stocks";
+            Title = "Stocks's analysis";
         }
     }
 }

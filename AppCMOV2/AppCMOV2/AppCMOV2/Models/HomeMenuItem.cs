@@ -8,7 +8,8 @@ namespace AppCMOV2.Models
     {
         Browse,
         About,
-        Stocks
+        Stocks,
+        CurrentQuotes
     }
     public class HomeMenuItem
     {

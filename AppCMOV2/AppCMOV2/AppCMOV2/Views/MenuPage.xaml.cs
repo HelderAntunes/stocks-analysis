@@ -18,7 +18,8 @@ namespace AppCMOV2.Views
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Stocks, Title="Stocks" },
+                new HomeMenuItem {Id = MenuItemType.Stocks, Title="Stocks's analysis" },
+                new HomeMenuItem {Id = MenuItemType.CurrentQuotes, Title="Current Quotes"},
                 new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
                 new HomeMenuItem {Id = MenuItemType.About, Title="About" }
             };

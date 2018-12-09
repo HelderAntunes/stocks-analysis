@@ -12,11 +12,6 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Stocks" 
-                HorizontalOptions="CenterAndExpand"
-                FontSize="Large"
-                FontFamily="{StaticResource NormalFont}"/>
-
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
                 <Picker x:Name="picker1" Title="Company 1" FontFamily="{StaticResource NormalFont}"/>
                 <Picker x:Name="picker2" Title="Company 2" FontFamily="{StaticResource NormalFont}"/>

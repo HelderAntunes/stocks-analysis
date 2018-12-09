@@ -41,6 +41,7 @@ module.exports = {
         '&symbol=' + nameToTick[company1] + '&startDate=' + startDate + '&type=' + type,
     }
     console.log(options.url)
+    
     request(options, (error, response, body) => {
       if (!error && response.statusCode == 200) {
         body = JSON.parse(body)
