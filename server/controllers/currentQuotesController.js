@@ -24,6 +24,7 @@ module.exports = {
         request(options, (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 body = JSON.parse(body)
+                console.log(body)
                 res.status(200).send(body)
             } else {
                 const resJSON = {

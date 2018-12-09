@@ -11,10 +11,41 @@
     
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Current quotes!!!!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Label x:Name="result"/>
+            <ActivityIndicator x:Name="Loader" Color="Blue" IsRunning="true" />
+            <ListView x:Name="QuotesView"
+                      SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding image}" HeightRequest="32" WidthRequest="32"/>
+                                <Label Text="{Binding companyName}"
+                                       TextColor="#000000"
+                                       FontSize="Medium"
+                                       Margin="5,0,5,0"
+                                       VerticalOptions="Center"/>
+                                <StackLayout Orientation="Vertical" HorizontalOptions="EndAndExpand">
+                                    <Label Text="{Binding currentInfo}"
+                                       TextColor="#000000"
+                                       Margin="5,0,5,0"
+                                       FontSize="Small"
+                                       HorizontalOptions="EndAndExpand"/>
+                                    <Label Text="{Binding changeInfo}"
+                                       TextColor="{Binding color}"
+                                       Margin="5,0,5,0"
+                                       FontSize="Micro"
+                                       HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+                                
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button x:Name="btUpdate"
+              Text="Update"
+              HorizontalOptions="Center"
+              IsVisible="False"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

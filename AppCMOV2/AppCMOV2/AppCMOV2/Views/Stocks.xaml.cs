@@ -95,7 +95,11 @@ namespace AppCMOV2.Views
                     url += "&company2=" + company2;
                     url += "&type=" + type;
                     url += "&startDate=" + "20160701";
+                    Loader.IsVisible = true;
+                    Loader.IsRunning = true;
                     HttpResponseMessage message = await client.GetAsync(url);
+                    Loader.IsRunning = false;
+                    Loader.IsVisible = false;
                     if (message.StatusCode == HttpStatusCode.OK)
                     {
                         StockList r = JsonConvert.DeserializeObject<StockList>(await message.Content.ReadAsStringAsync());
