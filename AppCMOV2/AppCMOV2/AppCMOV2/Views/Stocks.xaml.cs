@@ -143,12 +143,12 @@ namespace AppCMOV2.Views
             SKPath path = new SKPath();
             float paddingX = 0.1f * info.Width;
             float paddingY = 0.1f * info.Height;
-            // X
+            /*// X
             path.MoveTo(paddingX, info.Height - paddingY);
             path.LineTo(info.Width - paddingX, info.Height - paddingY);
             // Y
             path.MoveTo(paddingX, info.Height - paddingY);
-            path.LineTo(paddingX, paddingY);
+            path.LineTo(paddingX, paddingY);*/
 
             SKPaint strokePaint = new SKPaint
             {
@@ -178,19 +178,66 @@ namespace AppCMOV2.Views
             double endX = info.Width - paddingX;
             double diffScaleX = endX - initX;
 
+            //Axis
+            double scale = Math.Pow(10, Math.Floor(Math.Log10(diffPrices)));
+            double min = Math.Floor(minPrice / scale) * scale;
+            double max = Math.Ceiling(maxPrice / scale) * scale;
+            drawAxis(canvas, info.Width, 0, 0, 0, info.Height, min, max, scale);
+
             if (stockPrices1.Count > 0)
             {
-                drawOneStockCompany(canvas, initX, initY, minPrice, diffPrices, diffScaleX, 
+                drawOneStockCompany(canvas, initX, initY, min, max-min, diffScaleX, 
                     diffScaleY, numPoints, stockPrices1, SKColors.Red);
             }
             if (stockPrices2.Count > 0)
             {
-                drawOneStockCompany(canvas, initX, initY, minPrice, diffPrices, diffScaleX, 
+                drawOneStockCompany(canvas, initX, initY, min, max-min, diffScaleX, 
                     diffScaleY, numPoints, stockPrices2, SKColors.Green);
             }
         }
 
-        void drawOneStockCompany(SKCanvas canvas, double initX, double initY, double minPrice, double diffPrices,
+        void drawAxis(SKCanvas canvas, float width, double minX, double maxX, double scaleX, float height, double minY, double maxY, double scaleY)
+        {
+            SKPaint grey = new SKPaint
+            {
+                Style = SKPaintStyle.Stroke,
+                Color = SKColors.Gray,
+                StrokeWidth = 1
+            };
+
+            SKPaint black = new SKPaint
+            {
+                Style = SKPaintStyle.Stroke,
+                Color = SKColors.Black,
+                StrokeWidth = 1
+            };
+
+            //Calculate Padding
+            float paddingX = 0.1f * width;
+            float paddingY = 0.1f * height;
+
+            //Vertical Axis
+            canvas.DrawLine(paddingX, height - paddingY, paddingX, paddingY, black);
+
+            double divs = maxY - minY;
+            double d = divs / scaleY;
+            double ydivs = Math.Round(d);
+            int kas = (int)ydivs;
+            int yDivs = (int)(Math.Round((maxY - minY) / scaleY));
+
+            for (int i = 0; i <= yDivs; i++)
+            {
+                float h = 1 - (i * 1f / yDivs);
+                h *= height * 0.8f;
+                h += paddingY;
+                canvas.DrawLine(paddingX, h, width - paddingX, h, grey);
+                String text = "" + (i * scaleY + minY) + "€";
+                float textX = paddingX - black.MeasureText(text);
+                canvas.DrawText(text, paddingX - black.MeasureText(text) - 5, h + black.FontMetrics.CapHeight / 2, black);
+            }
+        }
+
+    void drawOneStockCompany(SKCanvas canvas, double initX, double initY, double minPrice, double diffPrices,
             double diffScaleX, double diffScaleY, int numPoints, List<double> stockPrices, SKColor color)
         {
             List<double> pricesY = new List<double>();
