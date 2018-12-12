@@ -263,7 +263,8 @@ namespace AppCMOV2.Views
             {
                 Style = SKPaintStyle.Stroke,
                 Color = color,
-                StrokeWidth = 2
+                StrokeWidth = 2,
+                IsAntialias=true
             };
             canvas.DrawPath(pathStockPrices, strokePaintStockPrices);
         }
