@@ -35,10 +35,11 @@ module.exports = {
     nameToTick['Twitter'] = 'TWTR';
     nameToTick['Intel'] = 'INTC';
     nameToTick['AMD'] = 'AMD';
+    const maxRecords = type === 'week'? 7:30;
 
     const options = {
       url: 'https://marketdata.websol.barchart.com/getHistory.json?apikey=' + APIKEY +
-        '&symbol=' + nameToTick[company1] + '&startDate=' + startDate + '&type=' + type,
+        '&symbol=' + nameToTick[company1] + '&startDate=' + startDate + '&type=daily' + '&maxRecords=' + maxRecords,
     }
     console.log(options.url)
     
@@ -59,7 +60,7 @@ module.exports = {
         } else {
           const options2 = {
             url: 'https://marketdata.websol.barchart.com/getHistory.json?apikey=' + APIKEY +
-              '&symbol=' + nameToTick[company2] + '&startDate=' + startDate + '&type=' + type,
+              '&symbol=' + nameToTick[company2] + '&startDate=' + startDate + '&type=daily' + '&maxRecords=' + maxRecords,
           }
 
           request(options2, (error, response, body) => {

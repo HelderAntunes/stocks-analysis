@@ -19,7 +19,7 @@ namespace AppCMOV2.Views
         List<double> stockPrices2 = new List<double>();
         List<string> companiesList = new List<string>();
         List<string> intervalList = new List<string>();
-        string company1 = "none", company2 = "none", type = "weekly";
+        string company1 = "none", company2 = "none", type = "7 days";
 
         public Stocks ()
 		{
@@ -40,8 +40,8 @@ namespace AppCMOV2.Views
             picker1.SelectedIndexChanged += Picker1SelectedIndexChanged;
             picker2.ItemsSource = companiesList;
             picker2.SelectedIndexChanged += Picker2SelectedIndexChanged;
-            intervalList.Add("weekly");
-            intervalList.Add("monthly");
+            intervalList.Add("week");
+            intervalList.Add("month");
             pickerInterval.ItemsSource = intervalList;
             pickerInterval.SelectedIndex = 0;
             pickerInterval.SelectedIndexChanged += PickerIntervalSelectedIndexChanged;

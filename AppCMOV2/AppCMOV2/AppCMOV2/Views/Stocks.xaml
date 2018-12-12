@@ -19,7 +19,7 @@
             </StackLayout>
 
             <Picker x:Name="pickerInterval" 
-                    Title="Interval" 
+                    Title="Last" 
                     FontFamily="{StaticResource NormalFont}"
                     HorizontalOptions="Center"/>
 
