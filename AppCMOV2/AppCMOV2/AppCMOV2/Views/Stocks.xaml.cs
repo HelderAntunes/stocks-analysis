@@ -182,7 +182,7 @@ namespace AppCMOV2.Views
             double scale = Math.Pow(10, Math.Floor(Math.Log10(diffPrices)));
             double min = Math.Floor(minPrice / scale) * scale;
             double max = Math.Ceiling(maxPrice / scale) * scale;
-            drawAxis(canvas, info.Width, 0, 0, 0, info.Height, min, max, scale);
+            drawAxis(canvas, info.Width, 0, 0, 0, info.Height, min, max, scale, numPoints);
 
             if (stockPrices1.Count > 0)
             {
@@ -196,7 +196,7 @@ namespace AppCMOV2.Views
             }
         }
 
-        void drawAxis(SKCanvas canvas, float width, double minX, double maxX, double scaleX, float height, double minY, double maxY, double scaleY)
+        void drawAxis(SKCanvas canvas, float width, double minX, double maxX, double scaleX, float height, double minY, double maxY, double scaleY, int numberOfPoints)
         {
             SKPaint grey = new SKPaint
             {
@@ -234,6 +234,20 @@ namespace AppCMOV2.Views
                 String text = "" + (i * scaleY + minY) + "€";
                 float textX = paddingX - black.MeasureText(text);
                 canvas.DrawText(text, paddingX - black.MeasureText(text) - 5, h + black.FontMetrics.CapHeight / 2, black);
+            }
+
+            //Horizontal Axis
+            int step = 1;
+            while ( black.MeasureText(".000") * (numberOfPoints / step) > width)
+            {
+                step++;
+            }
+            for (int i = 0; i < numberOfPoints; i+=step)
+            {
+                String text = "" + (i - numberOfPoints);
+                float w = paddingX + width * 0.8f * i / (numberOfPoints-1);
+                canvas.DrawLine(w, paddingY, w, height - paddingY, grey);
+                canvas.DrawText(text, w - black.MeasureText(text) / 2, height - paddingY + black.FontMetrics.CapHeight + 5, black);
             }
         }
 
