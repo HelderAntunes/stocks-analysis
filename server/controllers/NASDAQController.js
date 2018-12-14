@@ -71,7 +71,8 @@ module.exports = {
                 "results1": results1,
                 "results2": body.results
               }
-              console.log(resJSON)
+              console.log(resJSON.results1.length)
+              
               res.status(200).send(resJSON)
             } else {
               const resJSON = {

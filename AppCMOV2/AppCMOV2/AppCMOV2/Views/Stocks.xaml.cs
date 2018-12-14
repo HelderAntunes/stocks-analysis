@@ -19,7 +19,7 @@ namespace AppCMOV2.Views
         List<double> stockPrices2 = new List<double>();
         List<string> companiesList = new List<string>();
         List<string> intervalList = new List<string>();
-        string company1 = "none", company2 = "none", type = "7 days";
+        string company1 = "none", company2 = "none", type = "week";
 
         public Stocks ()
 		{
